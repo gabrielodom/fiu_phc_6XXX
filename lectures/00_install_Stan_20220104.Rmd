@@ -1,0 +1,43 @@
+---
+title: "Getting Started with Stan"
+author: "Gabriel J. Odom, PhD, ThD"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+# Overview
+So you want to do some Bayesian inference? Well, you'll need some software. If you are reading this, you should already have [R](https://cran.r-project.org/) and [RStudio](https://www.rstudio.com/products/rstudio/download/) installed on your computer (**MAKE SURE YOU HAVE `R` VERSION 4.0 OR HIGHER**). This document will help you get started with a new piece of statistical software: [Stan](https://mc-stan.org/). Here are the steps to install this new software.
+
+
+
+# Step 1: Configure your Computer for C++
+Unlike R, code in Stan requires that your computer be able to compile code.
+
+
+## Compiling Code on Windows
+These steps are from [here](https://github.com/stan-dev/rstan/wiki/Configuring-C---Toolchain-for-Windows). You first want to ensure that you have the right Windows environment variables for R:
+```{r}
+Sys.getenv("BINPREF")
+```
+
+The code above should return `""` at this point in the install process.
+
+Now, install [Rtools](https://cran.r-project.org/bin/windows/Rtools/). You will also set another R environment variable using the code below:
+```{r}
+writeLines('PATH="${RTOOLS40_HOME}\\usr\\bin;${PATH}"', con = "~/.Renviron")
+```
+
+After you run this code, restart RStudio, and check that your system path has been updated.
+```{r, eval=TRUE}
+Sys.which("make")
+```
+
+The code above should return `"C:\\rtools40\\usr\\bin\\make.exe"`.
+
+
+## Compiling Code on Mac
+These steps are from [here](https://github.com/rmacoslib/r-macos-rtools). Because this process downloads Xcode, it may take some time (and I recommend that you use an ethernet internet connection if possible).
+
