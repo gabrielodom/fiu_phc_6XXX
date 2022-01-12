@@ -1,0 +1,53 @@
+---
+title: "Big (Bayesian) Picture"
+author: "Gabriel J. Odom, PhD, ThD"
+date: "1/12/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+*Material adapted from <https://www.bayesrulesbook.com/chapter-1.html>.*
+
+
+# Thinking like a Bayesian
+
+
+## Discussion Questions
+
+> Write down some answers to the questions below on a paper. Then, find a partner and swap papers. Discuss your answers.
+
+1. When flipping a fair coin, we say that "the probability of flipping Heads is 0.5." What does this mean to you?
+2. An election is coming up and a pollster claims that candidate A has a 0.9 probability of winning. How do you interpret this probability?
+3. Consider two claims. Read the experiments below, draw your conclusions, then contrast your conclusions
+    (1) Zuofu claims that he can predict the outcome of a coin flip. To test his claim, you flip a fair coin 10 times and he correctly predicts all 10.
+    (2) Kavya claims that she can distinguish natural and artificial sweeteners. To test her claim, you give her 10 sweetener samples and she correctly identifies each.
+4. Suppose that during a recent doctor’s visit, you tested positive for a very rare disease. If you can only ask your physician one question, which of the following do you ask, and why?
+    - "What’s the chance that I actually have the disease?"
+    - "If in fact I don’t have the disease, what’s the chance that I would’ve gotten this positive test result?"
+
+As an aside, the last question suddenly became very popular after COVID-19 testing kits were available. We will work on an example related to this later in the semester. If you can't wait that long, take a look at this: <https://www.lri.fr/~mbl/COVID19/bayes.html>.
+
+
+## Two Ways to Ask Questions
+
+Consider testing a patient for a rare disease. The test has the following properties when checked by a gold standard:
+
+| Outcome | Positive | Negative | Total |
+|:------- | --------:| --------:| -----:|
+| Sick    |        3 |        1 |     4 |
+| Healthy |        9 |       87 |    96 |
+| Total   |       12 |       88 |   100 |
+
+
+- **Frequentist**: Assuming the Null Hypothesis is true, what are the chances I would observe these (or more extreme) results? In this case, before we went to the doctor, we would have assumed we did not have this rare disease, so we look at data in the "Healthy" **row**: our "p" value would be 9/96 = `r 9/96`.
+- **Bayesian**: Assuming that the data are true, what is the chance that my hypothesis is correct? The "data" in this case is my positive test result and the 12 other positive test results. Now, we look in the "Positive" **column**: the *probability* (NOT a *p*-value) that I have the disease given my positive test result is 3/12 = `r 3/12`.
+
+
+# Main Course Ideas
+
+
+
+# Exercises
