@@ -46,8 +46,49 @@ Consider testing a patient for a rare disease. The test has the following proper
 - **Bayesian**: Assuming that the data are true, what is the chance that my hypothesis is correct? The "data" in this case is my positive test result and the 12 other positive test results. Now, we look in the "Positive" **column**: the *probability* (NOT a *p*-value) that I have the disease given my positive test result is 3/12 = `r 3/12`.
 
 
+*******************************************************************************
+
+</br>
+
 # Main Course Ideas
 
 
+## Section 1: Bayesian Foundations and Closed Forms
+
+- Review of Probability
+- Bayes' Theorem
+- The Beta-Binomial Model
+- Sequential Models
+- Other Conjugate Models
+
+
+## Section 2: Estimating the Posterior
+
+- Various Approximation Methods
+- A Deep Dive into MCMC
+- Predicting with the Posterior Distribution
+
+
+## Bayesian Regression and Classification
+
+- Normal Model Simple Regression
+- Regression Model Evaluation
+- Normal Model Multiple Regression
+- Generalized Linear Models
+- Naive Classification
+
+
+## Hierarchical Models
+
+- Longitudinal Data Analysis without Predictors
+- Longitudinal Data Analysis with Predictors
+
+
+*******************************************************************************
+
+</br>
 
 # Exercises
+
+1. Read "Think Like an Epidemiologist" (Roberts, 2020); available at the [NYT](https://www.nytimes.com/2020/08/04/science/coronavirus-bayes-statistics-math.html), but I saved a PDF version in `literature/` folder of our [class GitHub](https://github.com/gabrielodom/fiu_phc_6XXX)
+2. Review RMarkdown: <https://r4ds.had.co.nz/r-markdown.html>
