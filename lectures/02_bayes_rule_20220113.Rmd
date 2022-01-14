@@ -1,0 +1,118 @@
+---
+title: "Bayes' Rule"
+author: "Gabriel J. Odom, PhD, ThD"
+date: "1/13/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+*Material adapted from <https://www.bayesrulesbook.com/chapter-2.html>.*
+
+
+# Modelling Simple Events
+
+
+## Setup and Data
+```{r message=FALSE}
+# Load packages
+library(bayesrules)
+library(janitor)
+library(tidyverse)
+
+# Import article data
+data(fake_news)
+
+as_tibble(fake_news)
+```
+
+Let's explore the data some. To predict "real" vs. "fake" news, we need a reasonably balanced sample.
+```{r}
+fake_news %>% 
+  tabyl(type) %>% 
+  adorn_totals("row")
+```
+
+We could test our intuition: perhaps words in ALL CAPS or titles with exclamation points (!) make us suspicious?
+```{r}
+# ALL CAPS
+fake_news %>% 
+	mutate(title_has_all_caps = title_caps >= 1) %>% 
+  tabyl(title_has_all_caps, type) %>% 
+  adorn_totals(c("row", "col")) 
+
+# !!!
+fake_news %>% 
+  tabyl(title_has_excl, type) %>% 
+  adorn_totals(c("row", "col")) 
+```
+
+It appears that exclamation points are a major red flag for a news article (only `r round(2/90, 3) * 100` percent of the real articles use them).
+
+
+## Quick Probability Review
+
+*Adapted from <https://online.stat.psu.edu/stat800/lesson/general-probability-rules>. Also check out the Venn diagrams for some of the rules below [here](http://www.cs.uni.edu/~campbell/stat/venn.html).*
+
+Consider two events, $A$ and $B$, from a set of events $\mathbb{S}$.
+
+- We denote the probability of an event $A$ as $P(A)$.
+- For any event $A$, $P(A) \in [0,1]$.
+- The *compliment* of $A$ is literally any event other than $A$ in the set of all outcomes $\mathbb{S}$. It is denoted $A^c$, and it occurs with probability $1 - P(A)$.
+- The event that either of events $A$ OR $B$ occur is written as $A \cup B$.
+- The event that both of events $A$ AND $B$ occur simultaneously is written as $A \cap B$.
+- The probability of observing *any* event in $\mathbb{S}$ is 1; that is, if we have a set of all possible outcomes, $A_1, A_2, \ldots, A_i, \ldots \in \mathbb{S}$, then $P(\bigcup_{\mathbb{S}} A_i) = 1$.
+- The *empty set*, denoted $\emptyset$, is the compliment of $\mathbb{S}$. Thus, $P(\emptyset) = 1 - 1 = 0$.
+- Some trivial notes: $A \cup A^c = \mathbb{S}$ and $A \cap A^c = \emptyset$.
+- If we know that event $B$ occurred, then $P(A|B)$ is the *conditional probability* of event $A$ happening if we already observed event $B$.
+- In general, $P(A|B) \ne P(B|A)$. **Exercise: when are these two probabilities equal?**
+- The probability $P(A \cap B) = P(B|A) \times P(A)$ and also $P(A \cap B) = P(A|B) \times P(B)$. This is called the *multiplication rule*.
+- The probability $P(A \cup B) = P(A) + P(B) - P(A \cap B)$. This is caled the *addition rule*.
+- *DeMorgan's Law* states that $(A \cup B)^c = A^c \cap B^c$ and $(A \cap B)^c = A^c \cup B^c$.
+- Event $A$ is said to be *independent* of event $B$, denoted $A \perp B$, if knowing whether event $B$ occurs beforehand does not give us any information about the probability of event $A$ occurring; that is, $P(A|B) = P(A) \Longleftrightarrow A \perp B$.
+
+
+## Building a Bayesian Model
+Assume that our aunt shares a news article on Facebook entitled "The President is a Racist!". Given the data above, can we guess if the article is real news (event $R$) or "fake" news (event $F$)?
+
+### The Prior
+We saw in the data set above that 40% of the news articles in question are fake (assuming that it's a random sample of dumb articles). Let's build a *prior* probability distribution:
+
+$$
+\begin{aligned}
+  P(F) &= 0.4 \\
+  P(R) = P(F^c) &= 0.6
+\end{aligned}
+$$
+
+Now, we want to verify that this is indeed a probability distribution, so we ask two questions:
+
+1. Are all of the probabilities between 0 and 1?
+2. Does the sum of the probabilities for all outcomes equal 1?
+
+The first answer is trivially yes. For the second answer, we note that we assume that "mixtures" of truth and fiction do not exist (though this isn't the case in the real world---many reputable news sources have fallen into the trap of failing to independently verify sensational news stories, a phenomenon coined ["truth decay"](https://www.marketwatch.com/story/theres-a-truth-decay-in-american-journalism-study-says-media-has-become-more-biased-over-the-last-30-years-2019-05-15), while most news outlets have grown increasingly partisan [since 1987](https://en.wikipedia.org/wiki/FCC_fairness_doctrine)). If we assume that the *intent* of a news article to be intentionally dishonest is what qualifies fake news (rather than to simply persuade), then we can abide by the *complimentary* definitions of "real" and "fake" news: that is, a news article is either 100% "real" news or 100% "fake" news. Under this assumption, the sum of the probabilities of all outcomes is 1. Therefore, we have a probability distribution.
+
+### The Likelihood
+
+
+*******************************************************************************
+
+</br>
+
+# Example: What's That Drink Called?
+
+
+*******************************************************************************
+
+</br>
+
+# Modelling Random Variables
+
+
+*******************************************************************************
+
+</br>
+
+# Exercises
